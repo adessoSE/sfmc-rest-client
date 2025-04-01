@@ -47,7 +47,8 @@ export default function Rest (
         undefined,
         continueOnError,
         retries,
-        emptyContentHandling
+        emptyContentHandling,
+        undefined
       );
     };
     this.post = function (
@@ -56,7 +57,8 @@ export default function Rest (
       headers = [],
       continueOnError = true,
       retries = 0,
-      emptyContentHandling = 0
+      emptyContentHandling = 0,
+      encoding = 'UTF-8'
     ) {
       return this._fetch(
         endpoint,
@@ -65,7 +67,8 @@ export default function Rest (
         data,
         continueOnError,
         retries,
-        emptyContentHandling
+        emptyContentHandling,
+        encoding
       );
     };
     this.put = function (
@@ -74,7 +77,8 @@ export default function Rest (
       headers = [],
       continueOnError = true,
       retries = 0,
-      emptyContentHandling = 0
+      emptyContentHandling = 0,
+      encoding = 'UTF-8'
     ) {
       return this._fetch(
         endpoint,
@@ -83,7 +87,8 @@ export default function Rest (
         data,
         continueOnError,
         retries,
-        emptyContentHandling
+        emptyContentHandling,
+        encoding
       );
     };
     this.patch = function (
@@ -92,7 +97,8 @@ export default function Rest (
       headers = [],
       continueOnError = true,
       retries = 0,
-      emptyContentHandling = 0
+      emptyContentHandling = 0,
+      encoding = 'UTF-8'
     ) {
       return this._fetch(
         endpoint,
@@ -101,7 +107,8 @@ export default function Rest (
         data,
         continueOnError,
         retries,
-        emptyContentHandling
+        emptyContentHandling,
+        encoding
       );
     };
     this.delete = function (
@@ -118,7 +125,8 @@ export default function Rest (
         undefined,
         continueOnError,
         retries,
-        emptyContentHandling
+        emptyContentHandling,
+        undefined
       );
     };
     this._fetch = function (
@@ -128,7 +136,8 @@ export default function Rest (
       data,
       continueOnError,
       retries,
-      emptyContentHandling
+      emptyContentHandling,
+      encoding
     ) {
       var req = new Script.Util.HttpRequest(
         `${this.rest_instance_url}${endpoint}`
@@ -144,6 +153,9 @@ export default function Rest (
       if (data) {
         data = typeof data === "string" ? data : Stringify(data);
         req.postData = data;
+      }
+      if(encoding){
+        req.encoding = encoding;
       }
       const resp = req.send();
       return {
