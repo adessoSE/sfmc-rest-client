@@ -2,11 +2,11 @@
 
 ## Description
 
-Generic Rest Client for Salesforce Marketing Cloud.
+Generic Rest Client for Salesforce Marketing Cloud
 
 ## Installation
 
-npm sfmc-rest-client
+npm install sfmc-rest-client
 
 ## Documentation
 
